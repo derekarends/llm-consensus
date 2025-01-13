@@ -1,0 +1,35 @@
+{
+  "configurations": [
+    {
+      "type": "debugpy",
+      "request": "launch",
+      "name": "Launch Aggregator",
+      "program": "${workspaceFolder}/aggregator/app/main.py"
+    },
+    {
+      "type": "debugpy",
+      "request": "launch",
+      "name": "Launch Executor",
+      "program": "${workspaceFolder}/executor/app/main.py"
+    },
+    {
+      "type": "debugpy",
+      "request": "launch",
+      "name": "Launch LLM",
+      "program": "${workspaceFolder}/llm/app/main.py"
+    },
+    {
+      "type": "debugpy",
+      "request": "launch",
+      "name": "Launch Web",
+      "program": "${workspaceFolder}/web/app/main.py"
+    }
+  ],
+  "inputs": [
+    {
+      "type": "promptString",
+      "id": "programPath",
+      "description": "Path to the program"
+    }
+  ]
+}

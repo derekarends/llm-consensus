@@ -2,7 +2,7 @@ import os
 from .config import Settings
 from .dot_env import load_env
 
-load_env()
+load_env('./llm/.env')
 
 settings = Settings(
     azure_openai_api_key=os.getenv("AZURE_OPENAI_API_KEY", ""),

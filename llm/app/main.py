@@ -4,6 +4,9 @@ from typing import List
 from uuid import UUID, uuid4
 from fastapi import Depends, FastAPI, Request
 from fastapi.responses import JSONResponse
+from app import settings
+from .gpt import execute as execute_gpt
+from .phi import execute as execute_phi
 
 logging.basicConfig(
     level=logging.INFO,
@@ -14,9 +17,17 @@ logger = logging.getLogger(__name__)
 
 app = FastAPI()
 
+
 @app.get("/ping")
 async def pong():
-    return {"ping": "pong!"}
+    print("llm")
+    print(settings.llm)
+    if settings.llm == "phi":
+        execute_phi()
+        return {"ping": "pong! from phi"}
+    else:
+        execute_gpt()
+        return {"ping": "pong! from gpt"}
 
 
 # @app.get("/songs", response_model=list[Song])

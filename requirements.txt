@@ -1,0 +1,9 @@
+openai
+semantic_kernel
+instructor
+pydantic
+pydantic-settings
+redis
+fastapi[standard]
+streamlit
+azure-ai-inference

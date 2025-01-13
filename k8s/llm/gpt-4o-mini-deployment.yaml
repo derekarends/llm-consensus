@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: llm-mini
+  labels:
+    app: llm-mini
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: llm-mini
+  template:
+    metadata:
+      labels:
+        app: llm-mini
+    spec:
+      containers:
+      - name: llm-mini
+        image: llm-mini
+        imagePullPolicy: Never
+        command: ["fastapi", "run", "app/main.py"]
+      envFrom:
+      - configMapRef:
+          name: llm-mini-config

@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: llm-turbo
+  labels:
+    app: llm-turbo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: llm-turbo
+  template:
+    metadata:
+      labels:
+        app: llm-turbo
+    spec:
+      containers:
+      - name: llm-turbo
+        image: llm-turbo
+        imagePullPolicy: Never
+        command: ["fastapi", "run", "app/main.py"]
+      envFrom:
+      - configMapRef:
+          name: llm-turbo-config

@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: llm-executor
+  labels:
+    app: llm-executor
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: llm-executor
+  template:
+    metadata:
+      labels:
+        app: llm-executor
+    spec:
+      containers:
+      - name: llm-executor
+        image: llm-executor
+        imagePullPolicy: Never
+        command: ["fastapi", "run", "app/main.py"]
+      envFrom:
+      - configMapRef:
+          name: llm-executor-config

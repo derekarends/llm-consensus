@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: llm-aggregator
+  labels:
+    app: llm-aggregator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: llm-aggregator
+  template:
+    metadata:
+      labels:
+        app: llm-aggregator
+    spec:
+      containers:
+      - name: llm-aggregator
+        image: llm-aggregator
+        imagePullPolicy: Never
+        command: ["fastapi", "run", "app/main.py"]
+      envFrom:
+      - configMapRef:
+          name: llm-aggregator-config

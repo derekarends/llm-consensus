@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: llm-phi
+  labels:
+    app: llm-phi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: llm-phi
+  template:
+    metadata:
+      labels:
+        app: llm-phi
+    spec:
+      containers:
+      - name: llm-phi
+        image: llm-phi
+        imagePullPolicy: Never
+        command: ["fastapi", "run", "app/main.py"]
+      envFrom:
+      - configMapRef:
+          name: llm-phi-config

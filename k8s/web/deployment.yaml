@@ -15,16 +15,19 @@ spec:
         app: web
     spec:
       containers:
-      - name: streamlit-web
-        image: streamlit-web
+      - name: llm-web
+        image: llm-web
         imagePullPolicy: Never
         ports:
         - containerPort: 8501
+        envFrom:
+        - configMapRef:
+            name: llm-web-config
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: streamlit-web-service
+  name: llm-web-service
   labels:
     app: web
 spec:

@@ -18,7 +18,21 @@ spec:
       - name: llm-executor
         image: llm-executor
         imagePullPolicy: Never
-        command: ["fastapi", "run", "app/main.py"]
-      envFrom:
-      - configMapRef:
-          name: llm-executor-config
+        command: ["fastapi", "run", "app/main.py", "--port", "8002"]
+        envFrom:
+        - configMapRef:
+            name: llm-executor-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: llm-executor-service
+  labels:
+    app: executor-svc
+spec:
+  ports:
+  - port: 8002
+    targetPort: 8002
+  selector:
+    app: llm-executor
+  type: NodePort

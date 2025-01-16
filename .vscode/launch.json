@@ -4,32 +4,41 @@
       "type": "debugpy",
       "request": "launch",
       "name": "Launch Aggregator",
-      "program": "${workspaceFolder}/aggregator/app/main.py"
+      "program": ".venv/bin/fastapi",
+      "args": [
+          "run",
+          "${workspaceFolder}/aggregator/app/main.py"
+      ]
     },
     {
       "type": "debugpy",
       "request": "launch",
       "name": "Launch Executor",
-      "program": "${workspaceFolder}/executor/app/main.py"
+      "program": ".venv/bin/fastapi",
+      "args": [
+          "run",
+          "${workspaceFolder}/aggregator/app/main.py"
+      ]
     },
     {
       "type": "debugpy",
       "request": "launch",
       "name": "Launch LLM",
-      "program": "${workspaceFolder}/llm/app/main.py"
+      "program": ".venv/bin/fastapi",
+      "args": [
+          "run",
+          "${workspaceFolder}/aggregator/app/main.py"
+      ]
     },
     {
+      "name": "Launch Streamlit",
       "type": "debugpy",
       "request": "launch",
-      "name": "Launch Web",
-      "program": "${workspaceFolder}/web/app/main.py"
+      "program": ".venv/bin/streamlit",
+      "args": [
+          "run",
+          "${workspaceFolder}/web/app/main.py"
+      ]
     }
   ],
-  "inputs": [
-    {
-      "type": "promptString",
-      "id": "programPath",
-      "description": "Path to the program"
-    }
-  ]
 }

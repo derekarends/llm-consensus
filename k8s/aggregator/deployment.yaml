@@ -18,7 +18,21 @@ spec:
       - name: llm-aggregator
         image: llm-aggregator
         imagePullPolicy: Never
-        command: ["fastapi", "run", "app/main.py"]
-      envFrom:
-      - configMapRef:
-          name: llm-aggregator-config
+        command: ["fastapi", "run", "app/main.py", "--port", "8001"]
+        envFrom:
+        - configMapRef:
+            name: llm-aggregator-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: llm-aggregator-service
+  labels:
+    app: aggregator-svc
+spec:
+  ports:
+  - port: 8001
+    targetPort: 8001
+  selector:
+    app: llm-aggregator
+  type: NodePort

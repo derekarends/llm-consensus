@@ -1,7 +1,7 @@
 import redis
 import json
 
-from __init__ import settings
+from app import settings
 
 
 class RedisClient:

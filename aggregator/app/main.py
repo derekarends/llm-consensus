@@ -2,7 +2,7 @@ import logging
 import sys
 
 from fastapi import FastAPI
-from .agent import invoke_agent
+from .llm_caller import invoke
 from .models import SearchCommand
 
 logging.basicConfig(
@@ -17,6 +17,6 @@ app = FastAPI()
 
 
 @app.post("/search")
-async def search(req: SearchCommand):
-    logger.info(f"Received search request: {req}")
-    return await invoke_agent(req.chat_id, req.question)
+async def search(cmd: SearchCommand):
+    logger.info(f"Received search request: {cmd}")
+    return await cmd.execute()

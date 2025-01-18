@@ -18,7 +18,7 @@ spec:
       - name: llm-phi
         image: llm-phi
         imagePullPolicy: Never
-        command: ["fastapi", "run", "app/main.py"]
+        command: ["fastapi", "run", "app/main.py", "--port", "9003"]
       envFrom:
       - configMapRef:
           name: llm-phi-config

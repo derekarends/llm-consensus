@@ -1,8 +1,25 @@
+import logging
 from openai import AzureOpenAI
 from app import settings
+from .redis_client import RedisClient
+from semantic_kernel.contents import ChatHistory
 
 
-def execute():
+logger = logging.getLogger(__name__)
+
+def execute(chat_id: str, question: str) -> str | None:
+    r = RedisClient()
+    memory = r.get(chat_id) or []
+
+    history = ChatHistory()
+    for message in memory:  # type: ignore
+        if message["role"] == "user":
+            history.add_user_message(message["content"] if "content" in message else "")
+        elif message["role"] == "assistant":
+            history.add_assistant_message(message["content"] if "content" in message else "")
+
+    history.add_user_message(question)
+    
     deployment = settings.azure_openai_deployment_name
     client = AzureOpenAI(
         azure_endpoint=settings.azure_openai_endpoint,
@@ -10,25 +27,6 @@ def execute():
         api_version=settings.azure_openai_api_version,
     )
 
-    # IMAGE_PATH = "YOUR_IMAGE_PATH"
-    # encoded_image = base64.b64encode(open(IMAGE_PATH, 'rb').read()).decode('ascii')
-
-    chat_prompt = [
-        {
-            "role": "system",
-            "content": [
-                {
-                    "type": "text",
-                    "text": "You are an AI assistant that helps people find information.",
-                }
-            ],
-        }
-    ]
-
-    # Include speech result if speech is enabled
-    messages = chat_prompt
-
-    # Generate the completion
-    completion = client.chat.completions.create(model=deployment, messages=messages) # type: ignore
-
-    print(completion.to_json())
+    completion = client.chat.completions.create(model=deployment, messages=history) # type: ignore
+    logger.info(f"Completion: {completion.choices[0].message.content}")
+    return completion.choices[0].message.content

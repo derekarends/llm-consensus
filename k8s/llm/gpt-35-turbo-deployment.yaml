@@ -18,7 +18,7 @@ spec:
       - name: llm-turbo
         image: llm-turbo
         imagePullPolicy: Never
-        command: ["fastapi", "run", "app/main.py"]
+        command: ["fastapi", "run", "app/main.py", "--port", "9002"]
       envFrom:
       - configMapRef:
           name: llm-turbo-config

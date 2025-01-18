@@ -8,3 +8,4 @@ fastapi[standard]
 streamlit
 azure-ai-inference
 kubernetes
+aiohttp

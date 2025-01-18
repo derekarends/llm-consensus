@@ -7,7 +7,9 @@
       "program": ".venv/bin/fastapi",
       "args": [
           "run",
-          "${workspaceFolder}/aggregator/app/main.py"
+          "${workspaceFolder}/aggregator/app/main.py",
+          "--port",
+          "8001"
       ]
     },
     {
@@ -17,7 +19,9 @@
       "program": ".venv/bin/fastapi",
       "args": [
           "run",
-          "${workspaceFolder}/aggregator/app/main.py"
+          "${workspaceFolder}/aggregator/app/main.py",
+          "--port",
+          "8002"
       ]
     },
     {
@@ -27,7 +31,9 @@
       "program": ".venv/bin/fastapi",
       "args": [
           "run",
-          "${workspaceFolder}/aggregator/app/main.py"
+          "${workspaceFolder}/llm/app/main.py",
+          "--port",
+          "9001"
       ]
     },
     {

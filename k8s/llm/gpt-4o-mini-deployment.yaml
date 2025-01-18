@@ -16,9 +16,9 @@ spec:
     spec:
       containers:
       - name: llm-mini
-        image: llm-mini
+        image: llm
         imagePullPolicy: Never
         command: ["fastapi", "run", "app/main.py", "--port", "9001"]
-      envFrom:
-      - configMapRef:
-          name: llm-mini-config
+        envFrom:
+        - configMapRef:
+            name: llm-mini-config

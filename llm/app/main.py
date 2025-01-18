@@ -15,6 +15,6 @@ logger = logging.getLogger(__name__)
 app = FastAPI()
 
 
-@app.get("/search")
+@app.post("/search")
 async def search(cmd: SearchCommand):
     return cmd.execute()
